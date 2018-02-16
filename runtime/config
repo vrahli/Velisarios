@@ -1,0 +1,16 @@
+id:0   host:127.0.0.1   port:8760   private-key:private_key0   public-key:public_key0
+id:1   host:127.0.0.1   port:8761   private-key:private_key1   public-key:public_key1
+id:2   host:127.0.0.1   port:8762   private-key:private_key2   public-key:public_key2
+id:3   host:127.0.0.1   port:8763   private-key:private_key3   public-key:public_key3
+id:4   host:127.0.0.1   port:8764   private-key:private_key4   public-key:public_key4
+id:5   host:127.0.0.1   port:8775   private-key:private_key5   public-key:public_key5
+id:6   host:127.0.0.1   port:8766   private-key:private_key6   public-key:public_key6
+id:7   host:127.0.0.1   port:8767   private-key:private_key7   public-key:public_key7
+id:8   host:127.0.0.1   port:8768   private-key:private_key8   public-key:public_key8
+id:9   host:127.0.0.1   port:8769   private-key:private_key9   public-key:public_key9
+id:10  host:127.0.0.1   port:8770   private-key:private_key10  public-key:public_key10
+
+client:0   host:127.0.0.1   port:5000   private-key:private_key_client0   public-key:public_key_client0
+client:1   host:127.0.0.1   port:5001   private-key:private_key_client1   public-key:public_key_client1
+client:2   host:127.0.0.1   port:5002   private-key:private_key_client2   public-key:public_key_client2
+client:3   host:127.0.0.1   port:5003   private-key:private_key_client3   public-key:public_key_client3
