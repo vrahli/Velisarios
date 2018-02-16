@@ -73,7 +73,7 @@ let rec connect_to_loop (nfo : node_nfo) (wait : float) : Writer.t Deferred.t =
         ~reader_buffer_size:((*20*)40) (* What's the default value *)
         (*~interrupt:(Deferred.return (print_endline("[connection to " ^ node_nfo2string nfo ^ " died]")))*)
         ~buffer_age_limit:(`At_most(Time.Span.of_int_sec 10))
-        (Async.Tcp.to_inet_address (Socket.Address.Inet.create (Async.Unix.Inet_addr.of_string nfo.host) nfo.port)))
+        (Async.Tcp.Where_to_connect.of_inet_address (Socket.Address.Inet.create (Async.Unix.Inet_addr.of_string nfo.host) nfo.port)))
   >>= function
   | Ok (sock,_r,w) ->
      (

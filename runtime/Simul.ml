@@ -83,7 +83,7 @@ let rec run_client (id : client) (timestamp : int) (max : int) (avg : Prelude.Ti
   else ()
 
 let command =
-  Command.basic
+  Command.basic_spec
     ~summary:"Start a client"
     Command.Spec.(
       empty

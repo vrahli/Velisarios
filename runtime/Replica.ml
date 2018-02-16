@@ -283,13 +283,13 @@ let rec read_messages mynfo buffer size ofs : (msg list * string) =
     if total <= size then
       (*let str = String.sub buffer ofs total in*)
       (*print_endline ("[size: " ^ string_of_int size ^ "; total: " ^ string_of_int (Marshal.total_size buffer ofs) ^ "; bytes: " ^ str ^ "]");*)
-      let msg : msg = Marshal.from_string buffer ofs in
+      let msg : msg = Marshal.from_string (Bytes.to_string buffer) ofs in
       if total < size then
         let (msgs, rest) = read_messages mynfo buffer (size - total) (ofs + total) in
         (msg :: msgs, rest)
       else ([msg], "")
-    else ([], String.sub buffer ofs size)
-  else ([], String.sub buffer ofs size)
+    else ([], String.sub (Bytes.to_string buffer) ofs size)
+  else ([], String.sub (Bytes.to_string buffer) ofs size)
 
 
 let rec read_inputs mynfo init buffer r (nfos : conn_nfo list) : unit Deferred.t =
@@ -300,8 +300,8 @@ let rec read_inputs mynfo init buffer r (nfos : conn_nfo list) : unit Deferred.t
   | `Ok bytes_read ->
      (*print_endline ("[bytes read (bufer size: " ^ string_of_int bytes_read ^ ") (total size " ^ string_of_int (Marshal.total_size buffer 0) ^ "): " ^ String.sub buffer 0 bytes_read ^ "]");*)
      (*print_endline ("[(bufer size: " ^ string_of_int buffer_size ^ ") (bytes read: " ^ string_of_int bytes_read ^ ") (total size " ^ string_of_int (Marshal.total_size buffer 0) ^ ")]");*)
-     let buffer' = init ^ buffer in
-     let (msgs, rest) = read_messages mynfo buffer' (String.length init + bytes_read) 0 in
+     let buffer' = init ^ Bytes.to_string buffer in
+     let (msgs, rest) = read_messages mynfo (Bytes.of_string buffer') (String.length init + bytes_read) 0 in
      (***PRINTING***)
      (*print_endline (kCYN ^ "[read: " ^ Batteries.String.of_list (str_concat (map msg2string msgs)) ^ "]" ^ kNRM);*)
 
@@ -356,7 +356,7 @@ let setup_connections (myid : int) (conf : string) (numfaults : int) (numclients
     Tcp.Server.create
       ~on_handler_error:(*`Raise*)(`Call(fun addr exn -> print_endline ("[connection from " ^ Socket.Address.to_string addr ^ " died]")))
       (*~backlog:(100)*)
-      (Tcp.on_port own.port)
+      (Tcp.Where_to_listen.of_port own.port)
       (fun addr r _w ->
         print_endline (kBYEL ^ "[handling connection from " ^ Socket.Address.to_string addr ^ "]" ^ kNRM);
         let init = "" in
@@ -369,7 +369,7 @@ let setup_connections (myid : int) (conf : string) (numfaults : int) (numclients
 
                  
 let command =
-  Command.async
+  Command.async_spec
     ~summary:"Start a replica"
     Command.Spec.(
       empty

@@ -5,7 +5,7 @@ open MacKeyFun
 
 
 let command =
-  Command.async
+  Command.async_spec
     ~summary:"generates a symmetric key"
     Command.Spec.(
       empty

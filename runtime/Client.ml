@@ -381,14 +381,14 @@ let rec read_messages id conn buffer size ofs : string =
     let total = Marshal.total_size buffer ofs in
     if total <= size then
       (*print_endline ("[size: " ^ string_of_int size ^ "; total: " ^ string_of_int (Marshal.total_size buffer ofs) ^ "; bytes: " ^ str ^ "]");*)
-      let msg : pBFTmsg = Marshal.from_string buffer ofs in
+      let msg : pBFTmsg = Marshal.from_string (Bytes.to_string buffer) ofs in
       (*print_endline (kCYN ^ "[read: " ^ Batteries.String.of_list (msg2string msg) ^ "]" ^ kNRM);*)
       let _ = handle_message id conn msg in
       if total < size then
         read_messages id conn buffer (size - total) (ofs + total)
       else ""
-    else String.sub buffer ofs size
-  else String.sub buffer ofs size
+    else String.sub (Bytes.to_string buffer) ofs size
+  else String.sub (Bytes.to_string buffer) ofs size
 
 
 let rec read_inputs addr id init buffer r conn =
@@ -399,8 +399,8 @@ let rec read_inputs addr id init buffer r conn =
   | `Ok bytes_read ->
      (*print_endline ("[bytes read (bufer size: " ^ string_of_int bytes_read ^ ") (total size " ^ string_of_int (Marshal.total_size buffer 0) ^ "): " ^ String.sub buffer 0 bytes_read ^ "]");*)
      (*print_endline ("[bytes read (bufer size: " ^ string_of_int bytes_read ^ ") (total size " ^ string_of_int (Marshal.total_size buffer 0) ^ ")]");*)
-     let buffer' = init ^ buffer in
-     let rest = read_messages id conn buffer' (String.length init + bytes_read) 0 in
+     let buffer' = init ^ Bytes.to_string buffer in
+     let rest = read_messages id conn (Bytes.of_string buffer') (String.length init + bytes_read) 0 in
      read_inputs addr id rest buffer r conn;;
 
 
@@ -439,7 +439,7 @@ let initialize (id : int) (conf : string) (max : int) (nf : int) (numclients : i
   let host_and_port =
     Tcp.Server.create
       ~on_handler_error:(*`Raise*)`Ignore(*(`Call(fun addr exn -> print_endline ("[connection died]")))*)
-      (Tcp.on_port own.port)
+      (Tcp.Where_to_listen.of_port own.port)
       (fun addr r __ ->
         print_endline (kBYEL ^ "[handling connection from " ^ Socket.Address.to_string addr ^ "]" ^ kNRM);
         let init = "" in
@@ -449,7 +449,7 @@ let initialize (id : int) (conf : string) (max : int) (nf : int) (numclients : i
   Deferred.never ();;
 
 let command =
-  Command.async
+  Command.async_spec
     ~summary:"Start a client"
     Command.Spec.(
       empty

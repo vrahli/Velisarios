@@ -5,7 +5,7 @@ open RsaKeyFun
 
 
 let command =
-  Command.async
+  Command.async_spec
     ~summary:"generates a private key"
     Command.Spec.(
       empty
