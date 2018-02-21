@@ -1,12 +1,16 @@
 ***************************** DISCLAIMER *****************************
 
 nocrypto seems to be broken at the moment.  We're looking into a fix.
-For now you have to install it by hand from their github repository:
+For now you have to install it by hand from their github repository
+(I'm using OCaml version 4.06.0):
 clone `https://github.com/mirleft/ocaml-nocrypto`; then checkout the
 last stable version, namely
 `1c4fb7aaefcd9bd78dc6f7c53906eafcd7f94496`; then change
-`Sexplib.Sexp.t` into `Ppx_sexp_conv_lib.Sexp.t` in `nocrypto.mli`,
-and finally install it through opam, e.g., running
+`Sexplib.Sexp.t` into `Ppx_sexp_conv_lib.Sexp.t` in `nocrypto.mli`;
+then run
+`./pkg/pkg.ml build --with-unix true --with-lwt true --xen false --freestanding false`
+(you might have to install extra opam packages such as `oUnit` and `cstruct-unix`);
+finally install it through opam, e.g., running
 `opam pin add nocrypto . -n` and then `opam install nocrypto --verbose`.
 
 **********************************************************************
