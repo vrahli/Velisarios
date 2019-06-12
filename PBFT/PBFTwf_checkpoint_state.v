@@ -31,6 +31,9 @@ Require Export PBFTwf_prepared_info.
 Require Export PBFTordering.
 Require Export PBFTtactics3.
 
+Require Export List.
+Require Export Peano.
+
 
 Section PBFTwf_checkpoint_state.
 

@@ -1,7 +1,7 @@
 Compilation
 ===========
 
-The code compiles with Coq version 8.7.1.  To compile the code, first
+The code compiles with Coq version 8.9.0.  To compile the code, first
 generate a Makefile by running `./create-makefile.sh`.  Then type
 `make -j X`, where X is the number of jobs you want to use.
 

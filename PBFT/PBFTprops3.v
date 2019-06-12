@@ -27,6 +27,7 @@
 
 Require Export list_util1.
 Require Export PBFTprops2.
+Require Export List.
 
 
 Section PBFTprops3.

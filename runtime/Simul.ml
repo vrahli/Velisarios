@@ -1,11 +1,15 @@
-open Colors;;
-open Prelude;;
-open PbftReplica;;
-open Core;;
+open Colors
+open Prelude
+open PbftReplica
+open RsaKeyFun
+open Core
+
+(* turn this to false if you don't want to sign messages *)
+let signing : bool ref = ref true
 
 type idrep = { id : name ; replica : pBFTstate mStateMachine }
 
-let replicas : idrep list ref = ref [];;
+let replicas : idrep list ref = ref []
 
 let set_replicas () =
   replicas := [{ id = Obj.magic (PBFTreplica (Obj.magic 0)); replica = local_replica (Obj.magic 0) };
@@ -13,11 +17,16 @@ let set_replicas () =
                { id = Obj.magic (PBFTreplica (Obj.magic 2)); replica = local_replica (Obj.magic 2) };
                { id = Obj.magic (PBFTreplica (Obj.magic 3)); replica = local_replica (Obj.magic 3) }]
 
-let mk_request (timestamp : int) (request : int) (id : name) =
+let sign_request breq priv =
+  let o  = Obj.magic (PBFTmsg_bare_request breq) in
+  sign_one o priv
+
+let mk_request (priv : Nocrypto.Rsa.priv) (timestamp : int) (request : int) (id : name) =
   let opr       = Obj.magic (Opr_add request) in
-  let tokens    = [ (Obj.magic []) ] in
   let client    = id in
-  PBFTrequest (Req(Bare_req (opr,timestamp,client),tokens))
+  let breq      = Bare_req (opr,timestamp,client) in
+  let tokens    = [ (if !signing then Obj.magic (sign_request breq priv) else Obj.magic()) ] in
+  PBFTrequest (Req(breq,tokens))
 
 let rec find_replica (id : name) (replicas : idrep list) : (pBFTstate mStateMachine) option =
   match replicas with
@@ -61,8 +70,8 @@ let rec run_replicas_on_inputs (inflight : directedMsgs) : directedMsgs =
            replicas := replace_replica id rep' (!replicas);
            run_replicas_on_inputs (dm' :: dms @ dmsgs)
 
-let rec run_client (id : client) (timestamp : int) (max : int) (avg : Prelude.Time.t) (primary : name) (printing_period : int) =
-  let req = mk_request timestamp 17 id in
+let rec run_client (id : client) (priv : Nocrypto.Rsa.priv) (timestamp : int) (max : int) (avg : Prelude.Time.t) (primary : name) (printing_period : int) =
+  let req = mk_request priv timestamp 17 id in
   let inflight = [{ dmMsg = Obj.magic req; dmDst = [primary]; dmDelay = 0 }] in
   let t = Prelude.Time.get_time () in
   let failed_to_deliver = run_replicas_on_inputs inflight in
@@ -79,7 +88,7 @@ let rec run_client (id : client) (timestamp : int) (max : int) (avg : Prelude.Ti
                     ^ kNRM)
    else ());
   if timestamp < max then
-    run_client id (timestamp + 1) max new_avg primary printing_period
+    run_client id priv (timestamp + 1) max new_avg primary printing_period
   else ()
 
 let command =
@@ -94,11 +103,18 @@ let command =
         ~doc:" Number of messages to send (default 10)"
     )
     (fun max printing_period () ->
+      print_endline ("[initializing generator]");
+      let () = Nocrypto_entropy_unix.initialize () in
+
+      print_endline ("[setting replicas]");
       set_replicas ();
+
+      print_endline ("[running client]");
       let client_id         = Obj.magic 0 in
       let initial_timestamp = 1 in
       let initial_avg       = Prelude.Time.mk_time 0. in
       let primary           = Obj.magic (PBFTreplica (Obj.magic 0)) in
-      run_client client_id initial_timestamp max initial_avg primary printing_period)
+      let priv              = lookup_client_sending_key (Obj.magic client_id) in
+      run_client client_id priv initial_timestamp max initial_avg primary printing_period)
 
 let _ = Command.run ~version:"1.0" ~build_info:"PBFT" command

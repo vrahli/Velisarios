@@ -12,149 +12,53 @@ clean :
 	rm -f coq-tools/.*.aux     coq-tools/*.glob     coq-tools/*.vo
 	rm -f .*.aux               *.glob               *.vo
 
-PBFT/PBFTpreserves_has_new_view.vo : PBFT/PBFTpreserves_has_new_view.v PBFT/PBFTwell_formed_log.vo PBFT/PBFTwf_view_change_state.vo PBFT/PBFThas_new_view.vo PBFT/PBFTpre_prepares_are_received.vo PBFT/PBFTordering.vo PBFT/PBFTprops3.vo PBFT/PBFT_A_1_2_5.vo PBFT/PBFTnew_view_in_log.vo PBFT/PBFTcheck_broadcast_new_view.vo PBFT/PBFTnew_view_util.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTpreserves_has_new_view.v
+PBFT/PBFTview_changes_are_received.vo : PBFT/PBFTview_changes_are_received.v PBFT/PBFTview_change_somewhere_in_log.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTview_changes_are_received.v
+
+PBFT/PBFTgarbage_collect_prepare.vo : PBFT/PBFTgarbage_collect_prepare.v PBFT/PBFTgarbage_collect_misc1.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTgarbage_collect_prepare.v
+
+PBFT/PBFTnew_view_util.vo : PBFT/PBFTnew_view_util.v PBFT/PBFTprops2.vo PBFT/PBFTtactics.vo PBFT/PBFTwf_view_change_state.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTnew_view_util.v
 
 model/Msg.vo : model/Msg.v model/Node.vo
 	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds model/Msg.v
 
-PBFT/PBFTsent_commits_are_in_log.vo : PBFT/PBFTsent_commits_are_in_log.v PBFT/PBFTin_log.vo PBFT/PBFTcommit_in_log_preserves.vo PBFT/PBFTprepared_is_preserved.vo PBFT/PBFTprops4.vo PBFT/PBFTordering.vo PBFT/PBFTreceived_prepare_like.vo PBFT/PBFTprepare_like2request_data.vo PBFT/PBFTdelay_of_send_commits.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTsent_commits_are_in_log.v
+PBFT/PBFTordering.vo : PBFT/PBFTordering.v PBFT/PBFTprops4.vo PBFT/PBFTtactics3.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTordering.v
 
-PBFT/PBFTdelay_of_send_prepares.vo : PBFT/PBFTdelay_of_send_prepares.v PBFT/PBFTreceived_prepare_like1.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTdelay_of_send_prepares.v
+PBFT/PBFTreceived_prepare_like.vo : PBFT/PBFTreceived_prepare_like.v PBFT/PBFTreceived_prepare_like1.vo PBFT/PBFTreceived_prepare_like2.vo PBFT/PBFTreceived_prepare_like3.vo PBFT/PBFTreceived_prepare_like4.vo PBFT/PBFTreceived_prepare_like5.vo PBFT/PBFTreceived_prepare_like6.vo PBFT/PBFTreceived_prepare_like7.vo PBFT/PBFTreceived_prepare_like8.vo PBFT/PBFTreceived_prepare_like9.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTreceived_prepare_like.v
 
-PBFT/PBFT_A_1_9_part1.vo : PBFT/PBFT_A_1_9_part1.v PBFT/PBFT_A_1_2_1.vo PBFT/PBFT_A_1_2_2.vo PBFT/PBFTview_changes_from_good.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_9_part1.v
+PBFT/PBFTpreserves_has_new_view.vo : PBFT/PBFTpreserves_has_new_view.v PBFT/PBFTwell_formed_log.vo PBFT/PBFTwf_view_change_state.vo PBFT/PBFThas_new_view.vo PBFT/PBFTpre_prepares_are_received.vo PBFT/PBFTordering.vo PBFT/PBFTprops3.vo PBFT/PBFT_A_1_2_5.vo PBFT/PBFTnew_view_in_log.vo PBFT/PBFTcheck_broadcast_new_view.vo PBFT/PBFTnew_view_util.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTpreserves_has_new_view.v
 
-PBFT/PBFTnew_view_are_received3.vo : PBFT/PBFTnew_view_are_received3.v PBFT/PBFTprops4.vo PBFT/PBFTnew_view_in_log.vo PBFT/PBFTreceived_prepare_like.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTnew_view_are_received3.v
+PBFT/PBFT_A_1_9_misc1.vo : PBFT/PBFT_A_1_9_misc1.v PBFT/PBFTin_log.vo PBFT/PBFTprepared_is_preserved.vo PBFT/PBFTprops4.vo PBFT/PBFTreceived_prepare_like.vo PBFT/PBFT_A_1_9_part1.vo PBFT/PBFT_A_1_2_5.vo PBFT/PBFT_A_1_4.vo PBFT/PBFT_A_1_5.vo PBFT/PBFTcollision_resistant.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_9_misc1.v
 
-PBFT/PBFTview_change_in_log.vo : PBFT/PBFTview_change_in_log.v PBFT/PBFT.vo PBFT/PBFTprops2.vo PBFT/PBFTtactics.vo PBFT/PBFTwell_formed_log.vo PBFT/PBFTordering.vo PBFT/PBFTnew_view_in_log.vo PBFT/PBFTwf_view_change_state.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTview_change_in_log.v
+PBFT/PBFT_A_1_9_misc3.vo : PBFT/PBFT_A_1_9_misc3.v PBFT/PBFT_A_1_9_misc2.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_9_misc3.v
 
-PBFT/PBFTview_change_somewhere_in_log.vo : PBFT/PBFTview_change_somewhere_in_log.v PBFT/PBFT.vo PBFT/PBFTprops4.vo PBFT/PBFTtactics.vo PBFT/PBFTwell_formed_log.vo PBFT/PBFTordering.vo PBFT/PBFTnew_view_in_log.vo PBFT/PBFTwf_view_change_state.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTview_change_somewhere_in_log.v
-
-PBFT/PBFTprepares_like_of_new_views_are_received.vo : PBFT/PBFTprepares_like_of_new_views_are_received.v PBFT/PBFTreceived_prepare_like.vo PBFT/PBFTprops3.vo PBFT/PBFTview_changes_are_received.vo PBFT/PBFTprepare_like2request_data.vo PBFT/PBFTnew_view_learns_or_knows.vo PBFT/PBFTknows_own_new_view.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTprepares_like_of_new_views_are_received.v
-
-model/Received_or_generated.vo : model/Received_or_generated.v model/Quorum.vo model/Process.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds model/Received_or_generated.v
-
-PBFT/PBFTview_changes_from_good5.vo : PBFT/PBFTview_changes_from_good5.v PBFT/PBFTview_changes_from_good3.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTview_changes_from_good5.v
-
-PBFT/PBFTdelay_of_send_new_views.vo : PBFT/PBFTdelay_of_send_new_views.v PBFT/PBFTreceived_prepare_like1.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTdelay_of_send_new_views.v
-
-PBFT/PBFTview_changes_from_good4.vo : PBFT/PBFTview_changes_from_good4.v PBFT/PBFTview_changes_from_good1.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTview_changes_from_good4.v
-
-coq-tools/eq_rel.vo : coq-tools/eq_rel.v coq-tools/universe.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds coq-tools/eq_rel.v
-
-PBFT/PBFTview_changes_from_good7.vo : PBFT/PBFTview_changes_from_good7.v PBFT/PBFTview_changes_from_good3.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTview_changes_from_good7.v
-
-coq-tools/tactics2.vo : coq-tools/tactics2.v coq-tools/UsefulTypes.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds coq-tools/tactics2.v
-
-PBFT/PBFTview_changes_from_good6.vo : PBFT/PBFTview_changes_from_good6.v PBFT/PBFTview_changes_from_good3.vo PBFT/PBFTview_changes_from_good4.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTview_changes_from_good6.v
-
-PBFT/PBFTview_changes_from_good1.vo : PBFT/PBFTview_changes_from_good1.v PBFT/PBFTreceived_prepare_like.vo PBFT/PBFT_A_1_2_1.vo PBFT/PBFT_A_1_2_8.vo PBFT/PBFTnew_view_are_received3.vo PBFT/PBFTsent_commits_are_in_log.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTview_changes_from_good1.v
-
-PBFT/PBFT_A_1_2_2_direct_pred.vo : PBFT/PBFT_A_1_2_2_direct_pred.v PBFT/PBFT_A_1_2_2.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_2_2_direct_pred.v
-
-PBFT/PBFTview_changes_from_good3.vo : PBFT/PBFTview_changes_from_good3.v PBFT/PBFTview_changes_from_good1.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTview_changes_from_good3.v
-
-PBFT/PBFTview_changes_from_good2.vo : PBFT/PBFTview_changes_from_good2.v PBFT/PBFTview_changes_from_good1.vo PBFT/PBFTtactics4.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTview_changes_from_good2.v
-
-model/CorrectKeys.vo : model/CorrectKeys.v model/Process.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds model/CorrectKeys.v
-
-PBFT/PBFTwell_formed_log.vo : PBFT/PBFTwell_formed_log.v PBFT/PBFTwell_formed_log_def.vo PBFT/PBFTtactics3.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTwell_formed_log.v
-
-PBFT/PBFTall.vo : PBFT/PBFTall.v PBFT/PBFTheader.vo PBFT/PBFT.vo PBFT/PBFTprops.vo PBFT/PBFTtactics.vo PBFT/PBFTwell_formed_log.vo PBFT/PBFTwf_view_change_state.vo PBFT/PBFTwf_checkpoint_state.vo PBFT/PBFTpre_prepares_are_received.vo PBFT/PBFTview_changes_are_received.vo PBFT/PBFTnew_view_in_log.vo PBFT/PBFTview_change_in_log.vo PBFT/PBFTview_change_in_log_own.vo PBFT/PBFTprepared_is_preserved.vo PBFT/PBFThas_new_view.vo PBFT/PBFTordering.vo PBFT/PBFTprops2.vo PBFT/PBFTprops3.vo PBFT/PBFT_A_1_2_1.vo PBFT/PBFT_A_1_2_2.vo PBFT/PBFT_A_1_2_3.vo PBFT/PBFT_A_1_2_4.vo PBFT/PBFT_A_1_2_5.vo PBFT/PBFT_A_1_2_6.vo PBFT/PBFT_A_1_2_7.vo PBFT/PBFT_A_1_2_8.vo PBFT/PBFT_A_1_2_9.vo PBFT/PBFTwf.vo PBFT/PBFTgarbage_collect.vo PBFT/PBFT_A_1_2_1_somewhere.vo PBFT/PBFT_A_1_2_2_somewhere.vo PBFT/PBFTreceived_prepare_like.vo PBFT/PBFTprepares_like_of_new_views_are_received.vo PBFT/PBFTsent_commits_are_in_log.vo PBFT/PBFT_A_1_4.vo PBFT/PBFT_A_1_5.vo PBFT/PBFT_A_1_6.vo PBFT/PBFT_A_1_7.vo PBFT/PBFTview_changes_from_good.vo PBFT/PBFT_A_1_9_part1.vo PBFT/PBFT_A_1_9_misc1.vo PBFT/PBFT_A_1_9_misc2.vo PBFT/PBFT_A_1_9_misc3.vo PBFT/PBFT_A_1_9_misc4.vo PBFT/PBFT_A_1_9_misc5.vo PBFT/PBFT_A_1_9.vo PBFT/PBFT_A_1_10.vo PBFT/PBFT_A_1_11.vo PBFT/PBFTexecute.vo PBFT/PBFTexecute2.vo PBFT/PBFTcheckpoints_from_good.vo PBFT/PBFTexecute3.vo PBFT/PBFTexecute4.vo PBFT/PBFTsame_states.vo PBFT/PBFTagreement.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTall.v
-
-model/Crypto.vo : model/Crypto.v model/Node.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds model/Crypto.v
-
-PBFT/PBFTlearns_or_knows_vc_nv.vo : PBFT/PBFTlearns_or_knows_vc_nv.v PBFT/PBFTreceived_prepare_like1.vo PBFT/PBFTprepare_like2request_data.vo PBFT/PBFTnew_view_util.vo PBFT/PBFTcheckpoints_from_good.vo PBFT/PBFTstate_info.vo model/LearnAndKnows.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTlearns_or_knows_vc_nv.v
-
-PBFT/PBFT.vo : PBFT/PBFT.v PBFT/PBFTheader.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT.v
-
-PBFT/PBFT_A_1_2_9.vo : PBFT/PBFT_A_1_2_9.v PBFT/PBFTwell_formed_log.vo PBFT/PBFTpre_prepare_in_log_preserves.vo PBFT/PBFTordering.vo PBFT/PBFTprops3.vo PBFT/PBFTprops5.vo PBFT/PBFTgarbage_collect.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_2_9.v
-
-PBFT/PBFTheader.vo : PBFT/PBFTheader.v model/Quorum.vo model/Process.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTheader.v
-
-PBFT/PBFT_A_1_2_8.vo : PBFT/PBFT_A_1_2_8.v PBFT/PBFTpre_prepare_in_log_preserves.vo PBFT/PBFTprepare_in_log_preserves.vo PBFT/PBFTordering.vo PBFT/PBFTprops3.vo PBFT/PBFTreceived_prepare_like.vo PBFT/PBFTgarbage_collect.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_2_8.v
-
-PBFT/PBFTprepared_is_preserved.vo : PBFT/PBFTprepared_is_preserved.v PBFT/PBFTin_log.vo PBFT/PBFTprops3.vo PBFT/PBFTcommit_in_log_preserves.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTprepared_is_preserved.v
-
-PBFT/PBFTcommit_in_log_preserves.vo : PBFT/PBFTcommit_in_log_preserves.v PBFT/PBFTprops2.vo PBFT/PBFTwell_formed_log.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTcommit_in_log_preserves.v
-
-PBFT/PBFT_A_1_2_5.vo : PBFT/PBFT_A_1_2_5.v PBFT/PBFTwell_formed_log.vo PBFT/PBFTwf_view_change_state.vo PBFT/PBFTordering.vo PBFT/PBFTprops4.vo PBFT/PBFTnew_view_in_log.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_2_5.v
-
-PBFT/PBFTknows_own_new_view.vo : PBFT/PBFTknows_own_new_view.v PBFT/PBFTprops4.vo PBFT/PBFTnew_view_in_log.vo PBFT/PBFTreceived_prepare_like.vo PBFT/PBFTlearns_or_knows_nv.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTknows_own_new_view.v
-
-PBFT/PBFT_A_1_2_4.vo : PBFT/PBFT_A_1_2_4.v PBFT/PBFTwell_formed_log.vo PBFT/PBFTordering.vo PBFT/PBFTprops3.vo PBFT/PBFTnew_view_in_log.vo PBFT/PBFTwf_view_change_state.vo PBFT/PBFT_A_1_2_5.vo PBFT/PBFT_A_1_2_2.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_2_4.v
-
-PBFT/PBFTview_change_in_log_own.vo : PBFT/PBFTview_change_in_log_own.v PBFT/PBFT.vo PBFT/PBFTprops2.vo PBFT/PBFTtactics.vo PBFT/PBFTwell_formed_log.vo PBFT/PBFTordering.vo PBFT/PBFTnew_view_in_log.vo PBFT/PBFTwf_view_change_state.vo PBFT/PBFTview_change_in_log.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTview_change_in_log_own.v
-
-PBFT/PBFTprepare_like2request_data.vo : PBFT/PBFTprepare_like2request_data.v PBFT/PBFTreceived_prepare_like1.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTprepare_like2request_data.v
-
-PBFT/PBFT_A_1_2_7.vo : PBFT/PBFT_A_1_2_7.v PBFT/PBFTgarbage_collect.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_2_7.v
-
-model/generic_tactics.vo : model/generic_tactics.v model/EventOrdering.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds model/generic_tactics.v
-
-PBFT/PBFT_A_1_2_6.vo : PBFT/PBFT_A_1_2_6.v PBFT/PBFTview_change_in_log.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_2_6.v
-
-PBFT/PBFT_A_1_2_1.vo : PBFT/PBFT_A_1_2_1.v PBFT/PBFTwell_formed_log.vo PBFT/PBFTordering.vo PBFT/PBFTprops3.vo PBFT/PBFTwf.vo PBFT/PBFTgarbage_collect.vo PBFT/PBFTpreserves_has_new_view.vo PBFT/PBFT_A_1_2_7.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_2_1.v
-
-PBFT/PBFTgarbage_collect_pre_prepare.vo : PBFT/PBFTgarbage_collect_pre_prepare.v PBFT/PBFTgarbage_collect_misc1.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTgarbage_collect_pre_prepare.v
-
-PBFT/PBFTpre_prepare_in_log_preserves.vo : PBFT/PBFTpre_prepare_in_log_preserves.v PBFT/PBFTprops3.vo PBFT/PBFTwell_formed_log.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTpre_prepare_in_log_preserves.v
-
-PBFT/PBFT_A_1_2_3.vo : PBFT/PBFT_A_1_2_3.v PBFT/PBFTwell_formed_log.vo PBFT/PBFTpre_prepare_in_log_preserves.vo PBFT/PBFTordering.vo PBFT/PBFTprops3.vo PBFT/PBFTgarbage_collect.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_2_3.v
-
-PBFT/PBFT_A_1_2_2.vo : PBFT/PBFT_A_1_2_2.v PBFT/PBFTpreserves_has_new_view.vo PBFT/PBFT_A_1_2_3.vo PBFT/PBFT_A_1_2_9.vo PBFT/PBFTgarbage_collect.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_2_2.v
+PBFT/PBFT_A_1_9_misc2.vo : PBFT/PBFT_A_1_9_misc2.v PBFT/PBFT_A_1_9_part1.vo PBFT/PBFT_A_1_2_5.vo PBFT/PBFT_A_1_9_misc1.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_9_misc2.v
 
 coq-tools/universe.vo : coq-tools/universe.v
 	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds coq-tools/universe.v
 
-runtime/Simulator.vo : runtime/Simulator.v model/Process.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds runtime/Simulator.v
+PBFT/PBFT_A_1_9_misc5.vo : PBFT/PBFT_A_1_9_misc5.v PBFT/PBFTtactics3.vo PBFT/PBFTcollision_resistant.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_9_misc5.v
 
-PBFT/PBFTwf_view_change_state_no_repeats.vo : PBFT/PBFTwf_view_change_state_no_repeats.v PBFT/PBFThas_new_view.vo PBFT/PBFTcheck_broadcast_new_view.vo PBFT/PBFTview_change_in_log.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTwf_view_change_state_no_repeats.v
+PBFT/PBFT_A_1_9_misc4.vo : PBFT/PBFT_A_1_9_misc4.v PBFT/PBFT_A_1_9_part1.vo PBFT/PBFT_A_1_2_5.vo PBFT/PBFT_A_1_9_misc1.vo PBFT/PBFT_A_1_9_misc2.vo PBFT/PBFT_A_1_9_misc3.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_9_misc4.v
+
+PBFT/PBFTprepares_like_of_new_views_are_received.vo : PBFT/PBFTprepares_like_of_new_views_are_received.v PBFT/PBFTreceived_prepare_like.vo PBFT/PBFTprops3.vo PBFT/PBFTview_changes_are_received.vo PBFT/PBFTprepare_like2request_data.vo PBFT/PBFTnew_view_learns_or_knows.vo PBFT/PBFTknows_own_new_view.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTprepares_like_of_new_views_are_received.v
+
+PBFT/PBFThas_new_view.vo : PBFT/PBFThas_new_view.v PBFT/PBFTprops4.vo PBFT/PBFTwf_view_change_state.vo PBFT/PBFTtactics3.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFThas_new_view.v
+
+PBFT/PBFT_A_1_10.vo : PBFT/PBFT_A_1_10.v PBFT/PBFT_A_1_4.vo PBFT/PBFT_A_1_9.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_10.v
 
 PBFT/PBFTexecute.vo : PBFT/PBFTexecute.v PBFT/PBFTnew_view_in_log.vo PBFT/PBFTgarbage_collect.vo PBFT/PBFTreceived_prepare_like.vo
 	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTexecute.v
@@ -162,266 +66,362 @@ PBFT/PBFTexecute.vo : PBFT/PBFTexecute.v PBFT/PBFTnew_view_in_log.vo PBFT/PBFTga
 PBFT/PBFT_A_1_11.vo : PBFT/PBFT_A_1_11.v PBFT/PBFT_A_1_7.vo PBFT/PBFT_A_1_10.vo
 	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_11.v
 
-PBFT/PBFTagreement.vo : PBFT/PBFTagreement.v PBFT/PBFTexecute4.vo PBFT/PBFTsame_states.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTagreement.v
-
-PBFT/PBFT_A_1_10.vo : PBFT/PBFT_A_1_10.v PBFT/PBFT_A_1_4.vo PBFT/PBFT_A_1_9.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_10.v
-
-PBFT/PBFTdelay_of_send_commits.vo : PBFT/PBFTdelay_of_send_commits.v PBFT/PBFTreceived_prepare_like1.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTdelay_of_send_commits.v
-
-PBFT/PBFTwf_prepared_info.vo : PBFT/PBFTwf_prepared_info.v PBFT/PBFTprops2.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTwf_prepared_info.v
-
 PBFT/PBFTwf_checkpoint_state.vo : PBFT/PBFTwf_checkpoint_state.v PBFT/PBFTprops2.vo PBFT/PBFTtactics.vo PBFT/PBFTwf_prepared_info.vo PBFT/PBFTordering.vo PBFT/PBFTtactics3.vo
 	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTwf_checkpoint_state.v
-
-PBFT/PBFTview_changes_are_received.vo : PBFT/PBFTview_changes_are_received.v PBFT/PBFTview_change_somewhere_in_log.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTview_changes_are_received.v
-
-PBFT/PBFTview_changes_from_good.vo : PBFT/PBFTview_changes_from_good.v PBFT/PBFTview_changes_from_good1.vo PBFT/PBFTview_changes_from_good2.vo PBFT/PBFTview_changes_from_good3.vo PBFT/PBFTview_changes_from_good4.vo PBFT/PBFTview_changes_from_good5.vo PBFT/PBFTview_changes_from_good6.vo PBFT/PBFTview_changes_from_good7.vo PBFT/PBFTnew_view_learns_or_knows.vo PBFT/PBFTknows_own_new_view.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTview_changes_from_good.v
-
-PBFT/PBFTprops5.vo : PBFT/PBFTprops5.v PBFT/PBFTwf_view_change_state.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTprops5.v
-
-PBFT/PBFTprops4.vo : PBFT/PBFTprops4.v PBFT/PBFTprops3.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTprops4.v
-
-coq-tools/tactics_util.vo : coq-tools/tactics_util.v coq-tools/tactics2.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds coq-tools/tactics_util.v
-
-PBFT/PBFTnew_view_learns_or_knows.vo : PBFT/PBFTnew_view_learns_or_knows.v PBFT/PBFTprops4.vo PBFT/PBFTnew_view_in_log.vo PBFT/PBFTreceived_prepare_like.vo PBFT/PBFTlearns_or_knows_nv.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTnew_view_learns_or_knows.v
-
-model/list_util1.vo : model/list_util1.v model/generic_tactics.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds model/list_util1.v
-
-PBFT/PBFThas_new_view.vo : PBFT/PBFThas_new_view.v PBFT/PBFTprops4.vo PBFT/PBFTwf_view_change_state.vo PBFT/PBFTtactics3.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFThas_new_view.v
-
-PBFT/PBFTnew_view_util.vo : PBFT/PBFTnew_view_util.v PBFT/PBFTprops2.vo PBFT/PBFTtactics.vo PBFT/PBFTwf_view_change_state.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTnew_view_util.v
-
-PBFT/PBFTpre_prepares_are_received.vo : PBFT/PBFTpre_prepares_are_received.v PBFT/PBFTin_log.vo PBFT/PBFTordering.vo PBFT/PBFTpre_prepare_in_log_preserves.vo PBFT/PBFTprops5.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTpre_prepares_are_received.v
-
-coq-tools/UsefulTypes.vo : coq-tools/UsefulTypes.v coq-tools/tactics.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds coq-tools/UsefulTypes.v
-
-PBFT/PBFTsame_states.vo : PBFT/PBFTsame_states.v PBFT/PBFTexecute3.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTsame_states.v
-
-PBFT/PBFTprops3.vo : PBFT/PBFTprops3.v model/list_util1.vo PBFT/PBFTprops2.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTprops3.v
-
-PBFT/PBFTnew_view_in_log.vo : PBFT/PBFTnew_view_in_log.v PBFT/PBFT.vo PBFT/PBFTprops2.vo PBFT/PBFTtactics.vo PBFT/PBFTwf_view_change_state.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTnew_view_in_log.v
-
-model/CorrectTrace.vo : model/CorrectTrace.v model/Quorum.vo model/EventOrderingLemmas.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds model/CorrectTrace.v
-
-PBFT/PBFTprops2.vo : PBFT/PBFTprops2.v PBFT/PBFTin_log.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTprops2.v
-
-PBFT/PBFTreceived_prepare_like.vo : PBFT/PBFTreceived_prepare_like.v PBFT/PBFTreceived_prepare_like1.vo PBFT/PBFTreceived_prepare_like2.vo PBFT/PBFTreceived_prepare_like3.vo PBFT/PBFTreceived_prepare_like4.vo PBFT/PBFTreceived_prepare_like5.vo PBFT/PBFTreceived_prepare_like6.vo PBFT/PBFTreceived_prepare_like7.vo PBFT/PBFTreceived_prepare_like8.vo PBFT/PBFTreceived_prepare_like9.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTreceived_prepare_like.v
-
-PBFT/PBFTdelay_of_send_view_changes.vo : PBFT/PBFTdelay_of_send_view_changes.v PBFT/PBFTreceived_prepare_like1.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTdelay_of_send_view_changes.v
-
-PBFT/PBFTcheck_broadcast_new_view.vo : PBFT/PBFTcheck_broadcast_new_view.v PBFT/PBFTwell_formed_log.vo PBFT/PBFTwf_view_change_state.vo PBFT/PBFTgarbage_collect_misc1.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTcheck_broadcast_new_view.v
-
-PBFT/PBFTgarbage_collect_misc1.vo : PBFT/PBFTgarbage_collect_misc1.v PBFT/PBFTwell_formed_log.vo PBFT/PBFTordering.vo PBFT/PBFTprops3.vo PBFT/PBFTprops5.vo PBFT/PBFTsomewhere_in_log.vo PBFT/PBFTwf.vo PBFT/PBFTin_log.vo PBFT/PBFTpre_prepare_in_log_preserves.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTgarbage_collect_misc1.v
-
-PBFT/PBFTquorum.vo : PBFT/PBFTquorum.v PBFT/PBFTprops3.vo PBFT/PBFTat_most_f_byz.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTquorum.v
-
-PBFT/PBFTwf.vo : PBFT/PBFTwf.v PBFT/PBFTwell_formed_log.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTwf.v
-
-PBFT/PBFTprepare_in_log_preserves.vo : PBFT/PBFTprepare_in_log_preserves.v PBFT/PBFTprops2.vo PBFT/PBFTwell_formed_log.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTprepare_in_log_preserves.v
-
-PBFT/PBFTtactics2.vo : PBFT/PBFTtactics2.v PBFT/PBFTtactics.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTtactics2.v
-
-PBFT/PBFTtactics3.vo : PBFT/PBFTtactics3.v PBFT/PBFTwell_formed_log_def.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTtactics3.v
-
-coq-tools/tactics.vo : coq-tools/tactics.v coq-tools/eq_rel.vo coq-tools/LibTactics.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds coq-tools/tactics.v
-
-coq-tools/list_util.vo : coq-tools/list_util.v coq-tools/tactics2.vo coq-tools/tactics_util.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds coq-tools/list_util.v
-
-PBFT/PBFTin_iseg.vo : PBFT/PBFTin_iseg.v coq-tools/tactics2.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTin_iseg.v
-
-PBFT/PBFTtactics4.vo : PBFT/PBFTtactics4.v PBFT/PBFTtactics2.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTtactics4.v
-
-PBFT/PBFTtactics.vo : PBFT/PBFTtactics.v PBFT/PBFTprops.vo model/generic_tactics.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTtactics.v
-
-PBFT/PBFTprops.vo : PBFT/PBFTprops.v PBFT/PBFT.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTprops.v
-
-coq-tools/LibTactics.vo : coq-tools/LibTactics.v
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds coq-tools/LibTactics.v
-
-PBFT/PBFTsomewhere_in_log.vo : PBFT/PBFTsomewhere_in_log.v PBFT/PBFTin_log.vo PBFT/PBFTprepare_in_log_preserves.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTsomewhere_in_log.v
-
-model/LearnAndKnows.vo : model/LearnAndKnows.v model/Quorum.vo model/CorrectTrace.vo model/Process.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds model/LearnAndKnows.v
-
-model/EventOrderingLemmas.vo : model/EventOrderingLemmas.v model/EventOrdering.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds model/EventOrderingLemmas.v
-
-PBFT/PBFTlearns_or_knows_pl.vo : PBFT/PBFTlearns_or_knows_pl.v PBFT/PBFTreceived_prepare_like1.vo PBFT/PBFTprepare_like2request_data.vo model/LearnAndKnows.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTlearns_or_knows_pl.v
-
-PBFT/PBFTreceived_prepare_like8.vo : PBFT/PBFTreceived_prepare_like8.v PBFT/PBFTreceived_prepare_like3.vo PBFT/PBFTreceived_prepare_like4.vo PBFT/PBFTreceived_prepare_like5.vo PBFT/PBFTreceived_prepare_like6.vo PBFT/PBFTreceived_prepare_like7.vo PBFT/PBFTlearns_or_knows_pl.vo PBFT/PBFTdelay_of_send_prepares.vo PBFT/PBFTdelay_of_send_pre_prepares.vo PBFT/PBFTdelay_of_send_view_changes.vo PBFT/PBFTdelay_of_send_new_views.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTreceived_prepare_like8.v
-
-PBFT/PBFT_A_1_9_misc2.vo : PBFT/PBFT_A_1_9_misc2.v PBFT/PBFT_A_1_9_part1.vo PBFT/PBFT_A_1_2_5.vo PBFT/PBFT_A_1_9_misc1.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_9_misc2.v
-
-PBFT/PBFTreceived_prepare_like9.vo : PBFT/PBFTreceived_prepare_like9.v PBFT/PBFTreceived_prepare_like2.vo PBFT/PBFTreceived_prepare_like8.vo PBFT/PBFTprepare_like2request_data.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTreceived_prepare_like9.v
-
-PBFT/PBFT_A_1_9_misc3.vo : PBFT/PBFT_A_1_9_misc3.v PBFT/PBFT_A_1_9_misc2.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_9_misc3.v
-
-all.vo : all.v PrimaryBackup/PrimaryBackup.vo PBFT/PBFTall.vo runtime/Simulator.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds all.v
-
-PBFT/PBFTlearns_or_knows_cp_vc_nv.vo : PBFT/PBFTlearns_or_knows_cp_vc_nv.v PBFT/PBFTlearns_or_knows_vc_nv.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTlearns_or_knows_cp_vc_nv.v
-
-PBFT/PBFT_A_1_9_misc1.vo : PBFT/PBFT_A_1_9_misc1.v PBFT/PBFTin_log.vo PBFT/PBFTprepared_is_preserved.vo PBFT/PBFTprops4.vo PBFT/PBFTreceived_prepare_like.vo PBFT/PBFT_A_1_9_part1.vo PBFT/PBFT_A_1_2_5.vo PBFT/PBFT_A_1_4.vo PBFT/PBFT_A_1_5.vo PBFT/PBFTcollision_resistant.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_9_misc1.v
 
 PBFT/PBFTcollision_resistant.vo : PBFT/PBFTcollision_resistant.v PBFT/PBFT.vo
 	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTcollision_resistant.v
 
-PBFT/PBFTcheckpoints_from_good.vo : PBFT/PBFTcheckpoints_from_good.v PBFT/PBFTview_changes_from_good.vo PBFT/PBFTwf_checkpoint_state.vo PBFT/PBFTexecute.vo PBFT/PBFT_A_1_2_6.vo PBFT/PBFTdelay_of_send_checkpoints.vo PBFT/PBFTwf_view_change_state_no_repeats.vo PBFT/PBFTnew_view_learns_or_knows.vo PBFT/PBFTknows_own_new_view.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTcheckpoints_from_good.v
-
-model/Node.vo : model/Node.v coq-tools/tactics2.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds model/Node.v
-
-PBFT/PBFT_A_1_9_misc4.vo : PBFT/PBFT_A_1_9_misc4.v PBFT/PBFT_A_1_9_part1.vo PBFT/PBFT_A_1_2_5.vo PBFT/PBFT_A_1_9_misc1.vo PBFT/PBFT_A_1_9_misc2.vo PBFT/PBFT_A_1_9_misc3.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_9_misc4.v
-
-model/AuthMsg.vo : model/AuthMsg.v model/Crypto.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds model/AuthMsg.v
-
-PBFT/PBFT_A_1_9_misc5.vo : PBFT/PBFT_A_1_9_misc5.v PBFT/PBFTtactics3.vo PBFT/PBFTcollision_resistant.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_9_misc5.v
-
-PBFT/PBFTexecute4.vo : PBFT/PBFTexecute4.v PBFT/PBFTexecute3.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTexecute4.v
-
-PBFT/PBFT_A_1_2_1_somewhere.vo : PBFT/PBFT_A_1_2_1_somewhere.v PBFT/PBFT_A_1_2_1.vo PBFT/PBFTgarbage_collect.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_2_1_somewhere.v
-
-PBFT/PBFTstate_info.vo : PBFT/PBFTstate_info.v PBFT/PBFTwf_checkpoint_state.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTstate_info.v
-
-PBFT/PBFTreceived_prepare_like1.vo : PBFT/PBFTreceived_prepare_like1.v PBFT/PBFTin_log.vo PBFT/PBFTquorum.vo PBFT/PBFTwell_formed_log.vo PBFT/PBFTwf_view_change_state.vo PBFT/PBFTpre_prepare_in_log_preserves.vo PBFT/PBFTin_iseg.vo PBFT/PBFT_A_1_2_1_somewhere.vo PBFT/PBFT_A_1_2_2_somewhere.vo PBFT/PBFT_A_1_2_3.vo PBFT/PBFTview_change_in_log.vo PBFT/PBFTcheck_broadcast_new_view.vo PBFT/PBFTwf_view_change_state_no_repeats.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTreceived_prepare_like1.v
-
-PrimaryBackup/PrimaryBackup.vo : PrimaryBackup/PrimaryBackup.v model/Process.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PrimaryBackup/PrimaryBackup.v
-
-PBFT/PBFTreceived_prepare_like2.vo : PBFT/PBFTreceived_prepare_like2.v PBFT/PBFTreceived_prepare_like1.vo model/Received_or_generated.vo PBFT/PBFTlearns_or_knows_pl.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTreceived_prepare_like2.v
-
-PBFT/PBFTreceived_prepare_like3.vo : PBFT/PBFTreceived_prepare_like3.v PBFT/PBFTreceived_prepare_like1.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTreceived_prepare_like3.v
-
-PBFT/PBFTreceived_prepare_like4.vo : PBFT/PBFTreceived_prepare_like4.v PBFT/PBFTreceived_prepare_like1.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTreceived_prepare_like4.v
+PBFT/PBFTknows_prepared.vo : PBFT/PBFTknows_prepared.v PBFT/PBFTlearns_or_knows_pl.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTknows_prepared.v
 
 PBFT/PBFTwell_formed_log_def.vo : PBFT/PBFTwell_formed_log_def.v PBFT/PBFTwf_prepared_info.vo PBFT/PBFTtactics2.vo
 	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTwell_formed_log_def.v
 
-PBFT/PBFTreceived_prepare_like5.vo : PBFT/PBFTreceived_prepare_like5.v PBFT/PBFTreceived_prepare_like1.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTreceived_prepare_like5.v
+PBFT/PBFT_A_1_9_part1.vo : PBFT/PBFT_A_1_9_part1.v PBFT/PBFT_A_1_2_1.vo PBFT/PBFT_A_1_2_2.vo PBFT/PBFTview_changes_from_good.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_9_part1.v
 
-PBFT/PBFTwf_view_change_state.vo : PBFT/PBFTwf_view_change_state.v PBFT/PBFTprops4.vo PBFT/PBFTtactics.vo PBFT/PBFTtactics2.vo PBFT/PBFTwf_prepared_info.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTwf_view_change_state.v
+PBFT/PBFTall.vo : PBFT/PBFTall.v PBFT/PBFTheader.vo PBFT/PBFT.vo PBFT/PBFTprops.vo PBFT/PBFTtactics.vo PBFT/PBFTwell_formed_log.vo PBFT/PBFTwf_view_change_state.vo PBFT/PBFTwf_checkpoint_state.vo PBFT/PBFTpre_prepares_are_received.vo PBFT/PBFTview_changes_are_received.vo PBFT/PBFTnew_view_in_log.vo PBFT/PBFTview_change_in_log.vo PBFT/PBFTview_change_in_log_own.vo PBFT/PBFTprepared_is_preserved.vo PBFT/PBFThas_new_view.vo PBFT/PBFTordering.vo PBFT/PBFTprops2.vo PBFT/PBFTprops3.vo PBFT/PBFT_A_1_2_1.vo PBFT/PBFT_A_1_2_2.vo PBFT/PBFT_A_1_2_3.vo PBFT/PBFT_A_1_2_4.vo PBFT/PBFT_A_1_2_5.vo PBFT/PBFT_A_1_2_6.vo PBFT/PBFT_A_1_2_7.vo PBFT/PBFT_A_1_2_8.vo PBFT/PBFT_A_1_2_9.vo PBFT/PBFTwf.vo PBFT/PBFTgarbage_collect.vo PBFT/PBFT_A_1_2_1_somewhere.vo PBFT/PBFT_A_1_2_2_somewhere.vo PBFT/PBFTreceived_prepare_like.vo PBFT/PBFTprepares_like_of_new_views_are_received.vo PBFT/PBFTsent_commits_are_in_log.vo PBFT/PBFT_A_1_4.vo PBFT/PBFT_A_1_5.vo PBFT/PBFT_A_1_6.vo PBFT/PBFT_A_1_7.vo PBFT/PBFTview_changes_from_good.vo PBFT/PBFT_A_1_9_part1.vo PBFT/PBFT_A_1_9_misc1.vo PBFT/PBFT_A_1_9_misc2.vo PBFT/PBFT_A_1_9_misc3.vo PBFT/PBFT_A_1_9_misc4.vo PBFT/PBFT_A_1_9_misc5.vo PBFT/PBFT_A_1_9.vo PBFT/PBFT_A_1_10.vo PBFT/PBFT_A_1_11.vo PBFT/PBFTexecute.vo PBFT/PBFTexecute2.vo PBFT/PBFTcheckpoints_from_good.vo PBFT/PBFTexecute3.vo PBFT/PBFTexecute4.vo PBFT/PBFTsame_states.vo PBFT/PBFTagreement.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTall.v
 
-PBFT/PBFTdelay_of_send_pre_prepares.vo : PBFT/PBFTdelay_of_send_pre_prepares.v PBFT/PBFTreceived_prepare_like1.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTdelay_of_send_pre_prepares.v
+PBFT/PBFTview_change_somewhere_in_log.vo : PBFT/PBFTview_change_somewhere_in_log.v PBFT/PBFT.vo PBFT/PBFTprops4.vo PBFT/PBFTtactics.vo PBFT/PBFTwell_formed_log.vo PBFT/PBFTordering.vo PBFT/PBFTnew_view_in_log.vo PBFT/PBFTwf_view_change_state.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTview_change_somewhere_in_log.v
 
-PBFT/PBFTreceived_prepare_like6.vo : PBFT/PBFTreceived_prepare_like6.v PBFT/PBFTreceived_prepare_like1.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTreceived_prepare_like6.v
+PBFT/PBFTtactics.vo : PBFT/PBFTtactics.v PBFT/PBFTprops.vo model/generic_tactics.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTtactics.v
 
-PBFT/PBFTexecute2.vo : PBFT/PBFTexecute2.v PBFT/PBFTexecute.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTexecute2.v
+PBFT/PBFT_A_1_2_8.vo : PBFT/PBFT_A_1_2_8.v PBFT/PBFTpre_prepare_in_log_preserves.vo PBFT/PBFTprepare_in_log_preserves.vo PBFT/PBFTordering.vo PBFT/PBFTprops3.vo PBFT/PBFTreceived_prepare_like.vo PBFT/PBFTgarbage_collect.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_2_8.v
 
-PBFT/PBFTreceived_prepare_like7.vo : PBFT/PBFTreceived_prepare_like7.v PBFT/PBFTreceived_prepare_like1.vo model/Received_or_generated.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTreceived_prepare_like7.v
+PBFT/PBFTdelay_of_send_commits.vo : PBFT/PBFTdelay_of_send_commits.v PBFT/PBFTreceived_prepare_like1.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTdelay_of_send_commits.v
 
-PBFT/PBFTexecute3.vo : PBFT/PBFTexecute3.v PBFT/PBFTexecute2.vo PBFT/PBFT_A_1_11.vo PBFT/PBFTcheckpoints_from_good.vo PBFT/PBFTlearns_or_knows_vc_nv.vo PBFT/PBFTlearns_or_knows_cp_vc_nv.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTexecute3.v
+PBFT/PBFT_A_1_2_9.vo : PBFT/PBFT_A_1_2_9.v PBFT/PBFTwell_formed_log.vo PBFT/PBFTpre_prepare_in_log_preserves.vo PBFT/PBFTordering.vo PBFT/PBFTprops3.vo PBFT/PBFTprops5.vo PBFT/PBFTgarbage_collect.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_2_9.v
 
-model/EventOrdering.vo : model/EventOrdering.v coq-tools/list_util.vo model/Node.vo model/Msg.vo model/Crypto.vo model/AuthMsg.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds model/EventOrdering.v
+model/LearnAndKnows.vo : model/LearnAndKnows.v model/Quorum.vo model/CorrectTrace.vo model/Process.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds model/LearnAndKnows.v
 
-PBFT/PBFTgarbage_collect_prepare.vo : PBFT/PBFTgarbage_collect_prepare.v PBFT/PBFTgarbage_collect_misc1.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTgarbage_collect_prepare.v
+PBFT/PBFTquorum.vo : PBFT/PBFTquorum.v PBFT/PBFTprops3.vo PBFT/PBFTat_most_f_byz.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTquorum.v
 
-PBFT/PBFTgarbage_collect.vo : PBFT/PBFTgarbage_collect.v PBFT/PBFTgarbage_collect_misc1.vo PBFT/PBFTgarbage_collect_prepare.vo PBFT/PBFTgarbage_collect_pre_prepare.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTgarbage_collect.v
+PBFT/PBFT_A_1_2_2.vo : PBFT/PBFT_A_1_2_2.v PBFT/PBFTpreserves_has_new_view.vo PBFT/PBFT_A_1_2_3.vo PBFT/PBFT_A_1_2_9.vo PBFT/PBFTgarbage_collect.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_2_2.v
 
-PBFT/PBFT_A_1_6.vo : PBFT/PBFT_A_1_6.v PBFT/PBFTin_log.vo PBFT/PBFTcommit_in_log_preserves.vo PBFT/PBFTprepared_is_preserved.vo PBFT/PBFTprops4.vo PBFT/PBFTordering.vo PBFT/PBFTgarbage_collect.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_6.v
+PBFT/PBFTlearns_or_knows_pl.vo : PBFT/PBFTlearns_or_knows_pl.v PBFT/PBFTreceived_prepare_like1.vo PBFT/PBFTprepare_like2request_data.vo model/LearnAndKnows.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTlearns_or_knows_pl.v
 
-PBFT/PBFTlearns_or_knows_pl_nv.vo : PBFT/PBFTlearns_or_knows_pl_nv.v PBFT/PBFTlearns_or_knows_pl.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTlearns_or_knows_pl_nv.v
+PBFT/PBFTcheck_broadcast_new_view.vo : PBFT/PBFTcheck_broadcast_new_view.v PBFT/PBFTwell_formed_log.vo PBFT/PBFTwf_view_change_state.vo PBFT/PBFTgarbage_collect_misc1.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTcheck_broadcast_new_view.v
 
-PBFT/PBFTin_log.vo : PBFT/PBFTin_log.v PBFT/PBFT.vo PBFT/PBFTtactics.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTin_log.v
+PBFT/PBFT_A_1_2_3.vo : PBFT/PBFT_A_1_2_3.v PBFT/PBFTwell_formed_log.vo PBFT/PBFTpre_prepare_in_log_preserves.vo PBFT/PBFTordering.vo PBFT/PBFTprops3.vo PBFT/PBFTgarbage_collect.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_2_3.v
 
-model/Quorum.vo : model/Quorum.v model/generic_tactics.vo model/list_util1.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds model/Quorum.v
+PBFT/PBFTpre_prepare_in_log_preserves.vo : PBFT/PBFTpre_prepare_in_log_preserves.v PBFT/PBFTprops3.vo PBFT/PBFTwell_formed_log.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTpre_prepare_in_log_preserves.v
 
-PBFT/PBFT_A_1_7.vo : PBFT/PBFT_A_1_7.v PBFT/PBFT_A_1_6.vo PBFT/PBFTsent_commits_are_in_log.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_7.v
+model/CorrectTrace.vo : model/CorrectTrace.v model/Quorum.vo model/EventOrderingLemmas.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds model/CorrectTrace.v
 
-PBFT/PBFT_A_1_4.vo : PBFT/PBFT_A_1_4.v PBFT/PBFTreceived_prepare_like.vo PBFT/PBFTknows_prepared.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_4.v
+PrimaryBackup/PrimaryBackup.vo : PrimaryBackup/PrimaryBackup.v model/Process.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PrimaryBackup/PrimaryBackup.v
 
-PBFT/PBFTknows_prepared.vo : PBFT/PBFTknows_prepared.v PBFT/PBFTlearns_or_knows_pl.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTknows_prepared.v
+PBFT/PBFT_A_1_2_1.vo : PBFT/PBFT_A_1_2_1.v PBFT/PBFTwell_formed_log.vo PBFT/PBFTordering.vo PBFT/PBFTprops3.vo PBFT/PBFTwf.vo PBFT/PBFTgarbage_collect.vo PBFT/PBFTpreserves_has_new_view.vo PBFT/PBFT_A_1_2_7.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_2_1.v
 
-PBFT/PBFT_A_1_5.vo : PBFT/PBFT_A_1_5.v PBFT/PBFTprepares_like_of_new_views_are_received.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_5.v
+PBFT/PBFTin_iseg.vo : PBFT/PBFTin_iseg.v coq-tools/tactics2.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTin_iseg.v
+
+PBFT/PBFT_A_1_2_6.vo : PBFT/PBFT_A_1_2_6.v PBFT/PBFTview_change_in_log.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_2_6.v
+
+runtime/Simulator.vo : runtime/Simulator.v model/Process.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds runtime/Simulator.v
+
+PBFT/PBFT_A_1_2_7.vo : PBFT/PBFT_A_1_2_7.v PBFT/PBFTgarbage_collect.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_2_7.v
+
+PBFT/PBFTsomewhere_in_log.vo : PBFT/PBFTsomewhere_in_log.v PBFT/PBFTin_log.vo PBFT/PBFTprepare_in_log_preserves.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTsomewhere_in_log.v
+
+PBFT/PBFT_A_1_2_4.vo : PBFT/PBFT_A_1_2_4.v PBFT/PBFTwell_formed_log.vo PBFT/PBFTordering.vo PBFT/PBFTprops3.vo PBFT/PBFTnew_view_in_log.vo PBFT/PBFTwf_view_change_state.vo PBFT/PBFT_A_1_2_5.vo PBFT/PBFT_A_1_2_2.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_2_4.v
+
+PBFT/PBFT_A_1_2_5.vo : PBFT/PBFT_A_1_2_5.v PBFT/PBFTwell_formed_log.vo PBFT/PBFTwf_view_change_state.vo PBFT/PBFTordering.vo PBFT/PBFTprops4.vo PBFT/PBFTnew_view_in_log.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_2_5.v
 
 PBFT/PBFTdelay_of_send_checkpoints.vo : PBFT/PBFTdelay_of_send_checkpoints.v PBFT/PBFTreceived_prepare_like1.vo
 	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTdelay_of_send_checkpoints.v
 
-model/Process.vo : model/Process.v model/CorrectTrace.vo model/EventOrderingLemmas.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds model/Process.v
-
 PBFT/PBFT_A_1_9.vo : PBFT/PBFT_A_1_9.v PBFT/PBFT_A_1_9_part1.vo PBFT/PBFT_A_1_2_5.vo PBFT/PBFT_A_1_9_misc1.vo PBFT/PBFT_A_1_9_misc2.vo PBFT/PBFT_A_1_9_misc3.vo PBFT/PBFT_A_1_9_misc4.vo PBFT/PBFT_A_1_9_misc5.vo
 	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_9.v
 
-PBFT/PBFTlearns_or_knows_nv.vo : PBFT/PBFTlearns_or_knows_nv.v PBFT/PBFTreceived_prepare_like1.vo PBFT/PBFTprepare_like2request_data.vo PBFT/PBFTnew_view_util.vo model/LearnAndKnows.vo PBFT/PBFTlearns_or_knows_pl_nv.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTlearns_or_knows_nv.v
+coq-tools/LibTactics.vo : coq-tools/LibTactics.v
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds coq-tools/LibTactics.v
 
-PBFT/PBFTat_most_f_byz.vo : PBFT/PBFTat_most_f_byz.v PBFT/PBFT.vo model/CorrectKeys.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTat_most_f_byz.v
+model/Process.vo : model/Process.v model/CorrectTrace.vo model/EventOrderingLemmas.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds model/Process.v
+
+coq-tools/tactics.vo : coq-tools/tactics.v coq-tools/eq_rel.vo coq-tools/LibTactics.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds coq-tools/tactics.v
+
+PBFT/PBFT.vo : PBFT/PBFT.v PBFT/PBFTheader.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT.v
+
+PBFT/PBFTwell_formed_log.vo : PBFT/PBFTwell_formed_log.v PBFT/PBFTwell_formed_log_def.vo PBFT/PBFTtactics3.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTwell_formed_log.v
+
+PBFT/PBFTknows_own_new_view.vo : PBFT/PBFTknows_own_new_view.v PBFT/PBFTprops4.vo PBFT/PBFTnew_view_in_log.vo PBFT/PBFTreceived_prepare_like.vo PBFT/PBFTlearns_or_knows_nv.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTknows_own_new_view.v
+
+PBFT/PBFTgarbage_collect.vo : PBFT/PBFTgarbage_collect.v PBFT/PBFTgarbage_collect_misc1.vo PBFT/PBFTgarbage_collect_prepare.vo PBFT/PBFTgarbage_collect_pre_prepare.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTgarbage_collect.v
+
+coq-tools/tactics_util.vo : coq-tools/tactics_util.v coq-tools/tactics2.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds coq-tools/tactics_util.v
+
+PBFT/PBFTagreement.vo : PBFT/PBFTagreement.v PBFT/PBFTexecute4.vo PBFT/PBFTsame_states.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTagreement.v
+
+model/AuthMsg.vo : model/AuthMsg.v model/Crypto.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds model/AuthMsg.v
+
+PBFT/PBFTview_changes_from_good.vo : PBFT/PBFTview_changes_from_good.v PBFT/PBFTview_changes_from_good1.vo PBFT/PBFTview_changes_from_good2.vo PBFT/PBFTview_changes_from_good3.vo PBFT/PBFTview_changes_from_good4.vo PBFT/PBFTview_changes_from_good5.vo PBFT/PBFTview_changes_from_good6.vo PBFT/PBFTview_changes_from_good7.vo PBFT/PBFTnew_view_learns_or_knows.vo PBFT/PBFTknows_own_new_view.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTview_changes_from_good.v
+
+PBFT/PBFT_A_1_5.vo : PBFT/PBFT_A_1_5.v PBFT/PBFTprepares_like_of_new_views_are_received.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_5.v
+
+PBFT/PBFT_A_1_4.vo : PBFT/PBFT_A_1_4.v PBFT/PBFTreceived_prepare_like.vo PBFT/PBFTknows_prepared.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_4.v
+
+PBFT/PBFT_A_1_7.vo : PBFT/PBFT_A_1_7.v PBFT/PBFT_A_1_6.vo PBFT/PBFTsent_commits_are_in_log.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_7.v
+
+PBFT/PBFTlearns_or_knows_vc_nv.vo : PBFT/PBFTlearns_or_knows_vc_nv.v PBFT/PBFTreceived_prepare_like1.vo PBFT/PBFTprepare_like2request_data.vo PBFT/PBFTnew_view_util.vo PBFT/PBFTcheckpoints_from_good.vo PBFT/PBFTstate_info.vo model/LearnAndKnows.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTlearns_or_knows_vc_nv.v
+
+PBFT/PBFT_A_1_6.vo : PBFT/PBFT_A_1_6.v PBFT/PBFTin_log.vo PBFT/PBFTcommit_in_log_preserves.vo PBFT/PBFTprepared_is_preserved.vo PBFT/PBFTprops4.vo PBFT/PBFTordering.vo PBFT/PBFTgarbage_collect.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_6.v
+
+PBFT/PBFTview_changes_from_good4.vo : PBFT/PBFTview_changes_from_good4.v PBFT/PBFTview_changes_from_good1.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTview_changes_from_good4.v
+
+PBFT/PBFTreceived_prepare_like7.vo : PBFT/PBFTreceived_prepare_like7.v PBFT/PBFTreceived_prepare_like1.vo model/Received_or_generated.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTreceived_prepare_like7.v
+
+PBFT/PBFTwf_prepared_info.vo : PBFT/PBFTwf_prepared_info.v PBFT/PBFTprops2.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTwf_prepared_info.v
+
+PBFT/PBFTview_changes_from_good5.vo : PBFT/PBFTview_changes_from_good5.v PBFT/PBFTview_changes_from_good3.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTview_changes_from_good5.v
+
+PBFT/PBFTreceived_prepare_like6.vo : PBFT/PBFTreceived_prepare_like6.v PBFT/PBFTreceived_prepare_like1.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTreceived_prepare_like6.v
+
+PBFT/PBFTview_changes_from_good6.vo : PBFT/PBFTview_changes_from_good6.v PBFT/PBFTview_changes_from_good3.vo PBFT/PBFTview_changes_from_good4.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTview_changes_from_good6.v
+
+PBFT/PBFTreceived_prepare_like5.vo : PBFT/PBFTreceived_prepare_like5.v PBFT/PBFTreceived_prepare_like1.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTreceived_prepare_like5.v
+
+PBFT/PBFTview_changes_from_good7.vo : PBFT/PBFTview_changes_from_good7.v PBFT/PBFTview_changes_from_good3.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTview_changes_from_good7.v
+
+PBFT/PBFTreceived_prepare_like4.vo : PBFT/PBFTreceived_prepare_like4.v PBFT/PBFTreceived_prepare_like1.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTreceived_prepare_like4.v
+
+PBFT/PBFTreceived_prepare_like3.vo : PBFT/PBFTreceived_prepare_like3.v PBFT/PBFTreceived_prepare_like1.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTreceived_prepare_like3.v
+
+PBFT/PBFTview_changes_from_good1.vo : PBFT/PBFTview_changes_from_good1.v PBFT/PBFTreceived_prepare_like.vo PBFT/PBFT_A_1_2_1.vo PBFT/PBFT_A_1_2_8.vo PBFT/PBFTnew_view_are_received3.vo PBFT/PBFTsent_commits_are_in_log.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTview_changes_from_good1.v
+
+PBFT/PBFTreceived_prepare_like2.vo : PBFT/PBFTreceived_prepare_like2.v PBFT/PBFTreceived_prepare_like1.vo model/Received_or_generated.vo PBFT/PBFTlearns_or_knows_pl.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTreceived_prepare_like2.v
+
+coq-tools/UsefulTypes.vo : coq-tools/UsefulTypes.v coq-tools/tactics.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds coq-tools/UsefulTypes.v
+
+PBFT/PBFTview_changes_from_good2.vo : PBFT/PBFTview_changes_from_good2.v PBFT/PBFTview_changes_from_good1.vo PBFT/PBFTtactics4.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTview_changes_from_good2.v
+
+PBFT/PBFTreceived_prepare_like1.vo : PBFT/PBFTreceived_prepare_like1.v PBFT/PBFTin_log.vo PBFT/PBFTquorum.vo PBFT/PBFTwell_formed_log.vo PBFT/PBFTwf_view_change_state.vo PBFT/PBFTpre_prepare_in_log_preserves.vo PBFT/PBFTin_iseg.vo PBFT/PBFT_A_1_2_1_somewhere.vo PBFT/PBFT_A_1_2_2_somewhere.vo PBFT/PBFT_A_1_2_3.vo PBFT/PBFTview_change_in_log.vo PBFT/PBFTcheck_broadcast_new_view.vo PBFT/PBFTwf_view_change_state_no_repeats.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTreceived_prepare_like1.v
+
+PBFT/PBFTview_changes_from_good3.vo : PBFT/PBFTview_changes_from_good3.v PBFT/PBFTview_changes_from_good1.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTview_changes_from_good3.v
+
+coq-tools/eq_rel.vo : coq-tools/eq_rel.v coq-tools/universe.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds coq-tools/eq_rel.v
+
+PBFT/PBFTprepare_like2request_data.vo : PBFT/PBFTprepare_like2request_data.v PBFT/PBFTreceived_prepare_like1.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTprepare_like2request_data.v
+
+PBFT/PBFTdelay_of_send_new_views.vo : PBFT/PBFTdelay_of_send_new_views.v PBFT/PBFTreceived_prepare_like1.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTdelay_of_send_new_views.v
+
+PBFT/PBFTcheckpoints_from_good.vo : PBFT/PBFTcheckpoints_from_good.v PBFT/PBFTview_changes_from_good.vo PBFT/PBFTwf_checkpoint_state.vo PBFT/PBFTexecute.vo PBFT/PBFT_A_1_2_6.vo PBFT/PBFTdelay_of_send_checkpoints.vo PBFT/PBFTwf_view_change_state_no_repeats.vo PBFT/PBFTnew_view_learns_or_knows.vo PBFT/PBFTknows_own_new_view.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTcheckpoints_from_good.v
+
+PBFT/PBFTnew_view_learns_or_knows.vo : PBFT/PBFTnew_view_learns_or_knows.v PBFT/PBFTprops4.vo PBFT/PBFTnew_view_in_log.vo PBFT/PBFTreceived_prepare_like.vo PBFT/PBFTlearns_or_knows_nv.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTnew_view_learns_or_knows.v
+
+PBFT/PBFTreceived_prepare_like9.vo : PBFT/PBFTreceived_prepare_like9.v PBFT/PBFTreceived_prepare_like2.vo PBFT/PBFTreceived_prepare_like8.vo PBFT/PBFTprepare_like2request_data.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTreceived_prepare_like9.v
+
+model/CorrectKeys.vo : model/CorrectKeys.v model/Process.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds model/CorrectKeys.v
+
+PBFT/PBFTreceived_prepare_like8.vo : PBFT/PBFTreceived_prepare_like8.v PBFT/PBFTreceived_prepare_like3.vo PBFT/PBFTreceived_prepare_like4.vo PBFT/PBFTreceived_prepare_like5.vo PBFT/PBFTreceived_prepare_like6.vo PBFT/PBFTreceived_prepare_like7.vo PBFT/PBFTlearns_or_knows_pl.vo PBFT/PBFTdelay_of_send_prepares.vo PBFT/PBFTdelay_of_send_pre_prepares.vo PBFT/PBFTdelay_of_send_view_changes.vo PBFT/PBFTdelay_of_send_new_views.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTreceived_prepare_like8.v
+
+PBFT/PBFTsent_commits_are_in_log.vo : PBFT/PBFTsent_commits_are_in_log.v PBFT/PBFTin_log.vo PBFT/PBFTcommit_in_log_preserves.vo PBFT/PBFTprepared_is_preserved.vo PBFT/PBFTprops4.vo PBFT/PBFTordering.vo PBFT/PBFTreceived_prepare_like.vo PBFT/PBFTprepare_like2request_data.vo PBFT/PBFTdelay_of_send_commits.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTsent_commits_are_in_log.v
+
+PBFT/PBFTview_change_in_log.vo : PBFT/PBFTview_change_in_log.v PBFT/PBFT.vo PBFT/PBFTprops2.vo PBFT/PBFTtactics.vo PBFT/PBFTwell_formed_log.vo PBFT/PBFTordering.vo PBFT/PBFTnew_view_in_log.vo PBFT/PBFTwf_view_change_state.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTview_change_in_log.v
+
+PBFT/PBFTprepare_in_log_preserves.vo : PBFT/PBFTprepare_in_log_preserves.v PBFT/PBFTprops2.vo PBFT/PBFTwell_formed_log.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTprepare_in_log_preserves.v
+
+PBFT/PBFTprops2.vo : PBFT/PBFTprops2.v PBFT/PBFTin_log.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTprops2.v
+
+PBFT/PBFTwf_view_change_state_no_repeats.vo : PBFT/PBFTwf_view_change_state_no_repeats.v PBFT/PBFThas_new_view.vo PBFT/PBFTcheck_broadcast_new_view.vo PBFT/PBFTview_change_in_log.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTwf_view_change_state_no_repeats.v
+
+PBFT/PBFTprops3.vo : PBFT/PBFTprops3.v model/list_util1.vo PBFT/PBFTprops2.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTprops3.v
+
+PBFT/PBFTpre_prepares_are_received.vo : PBFT/PBFTpre_prepares_are_received.v PBFT/PBFTin_log.vo PBFT/PBFTordering.vo PBFT/PBFTpre_prepare_in_log_preserves.vo PBFT/PBFTprops5.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTpre_prepares_are_received.v
+
+PBFT/PBFTwf_view_change_state.vo : PBFT/PBFTwf_view_change_state.v PBFT/PBFTprops4.vo PBFT/PBFTtactics.vo PBFT/PBFTtactics2.vo PBFT/PBFTwf_prepared_info.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTwf_view_change_state.v
+
+PBFT/PBFTprops4.vo : PBFT/PBFTprops4.v PBFT/PBFTprops3.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTprops4.v
+
+PBFT/PBFTprops.vo : PBFT/PBFTprops.v PBFT/PBFT.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTprops.v
+
+PBFT/PBFTprops5.vo : PBFT/PBFTprops5.v PBFT/PBFTwf_view_change_state.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTprops5.v
+
+PBFT/PBFTwf.vo : PBFT/PBFTwf.v PBFT/PBFTwell_formed_log.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTwf.v
+
+PBFT/PBFTdelay_of_send_pre_prepares.vo : PBFT/PBFTdelay_of_send_pre_prepares.v PBFT/PBFTreceived_prepare_like1.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTdelay_of_send_pre_prepares.v
+
+PBFT/PBFTprepared_is_preserved.vo : PBFT/PBFTprepared_is_preserved.v PBFT/PBFTin_log.vo PBFT/PBFTprops3.vo PBFT/PBFTcommit_in_log_preserves.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTprepared_is_preserved.v
 
 PBFT/PBFT_A_1_2_2_somewhere.vo : PBFT/PBFT_A_1_2_2_somewhere.v PBFT/PBFT_A_1_2_2.vo PBFT/PBFT_A_1_2_2_direct_pred.vo PBFT/PBFTgarbage_collect.vo
 	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_2_2_somewhere.v
 
-PBFT/PBFTordering.vo : PBFT/PBFTordering.v PBFT/PBFTprops4.vo PBFT/PBFTtactics3.vo
-	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTordering.v
+PBFT/PBFT_A_1_2_2_direct_pred.vo : PBFT/PBFT_A_1_2_2_direct_pred.v PBFT/PBFT_A_1_2_2.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_2_2_direct_pred.v
+
+model/EventOrderingLemmas.vo : model/EventOrderingLemmas.v model/EventOrdering.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds model/EventOrderingLemmas.v
+
+PBFT/PBFTlearns_or_knows_pl_nv.vo : PBFT/PBFTlearns_or_knows_pl_nv.v PBFT/PBFTlearns_or_knows_pl.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTlearns_or_knows_pl_nv.v
+
+PBFT/PBFTdelay_of_send_view_changes.vo : PBFT/PBFTdelay_of_send_view_changes.v PBFT/PBFTreceived_prepare_like1.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTdelay_of_send_view_changes.v
+
+PBFT/PBFTsame_states.vo : PBFT/PBFTsame_states.v PBFT/PBFTexecute3.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTsame_states.v
+
+PBFT/PBFT_A_1_2_1_somewhere.vo : PBFT/PBFT_A_1_2_1_somewhere.v PBFT/PBFT_A_1_2_1.vo PBFT/PBFTgarbage_collect.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFT_A_1_2_1_somewhere.v
+
+PBFT/PBFTexecute3.vo : PBFT/PBFTexecute3.v PBFT/PBFTexecute2.vo PBFT/PBFT_A_1_11.vo PBFT/PBFTcheckpoints_from_good.vo PBFT/PBFTlearns_or_knows_vc_nv.vo PBFT/PBFTlearns_or_knows_cp_vc_nv.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTexecute3.v
+
+PBFT/PBFTexecute2.vo : PBFT/PBFTexecute2.v PBFT/PBFTexecute.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTexecute2.v
+
+model/Node.vo : model/Node.v coq-tools/tactics2.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds model/Node.v
+
+PBFT/PBFTlearns_or_knows_nv.vo : PBFT/PBFTlearns_or_knows_nv.v PBFT/PBFTreceived_prepare_like1.vo PBFT/PBFTprepare_like2request_data.vo PBFT/PBFTnew_view_util.vo model/LearnAndKnows.vo PBFT/PBFTlearns_or_knows_pl_nv.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTlearns_or_knows_nv.v
+
+coq-tools/tactics2.vo : coq-tools/tactics2.v coq-tools/UsefulTypes.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds coq-tools/tactics2.v
+
+all.vo : all.v PrimaryBackup/PrimaryBackup.vo PBFT/PBFTall.vo runtime/Simulator.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds all.v
+
+PBFT/PBFTexecute4.vo : PBFT/PBFTexecute4.v PBFT/PBFTexecute3.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTexecute4.v
+
+PBFT/PBFTnew_view_are_received3.vo : PBFT/PBFTnew_view_are_received3.v PBFT/PBFTprops4.vo PBFT/PBFTnew_view_in_log.vo PBFT/PBFTreceived_prepare_like.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTnew_view_are_received3.v
+
+PBFT/PBFTgarbage_collect_misc1.vo : PBFT/PBFTgarbage_collect_misc1.v PBFT/PBFTwell_formed_log.vo PBFT/PBFTordering.vo PBFT/PBFTprops3.vo PBFT/PBFTprops5.vo PBFT/PBFTsomewhere_in_log.vo PBFT/PBFTwf.vo PBFT/PBFTin_log.vo PBFT/PBFTpre_prepare_in_log_preserves.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTgarbage_collect_misc1.v
+
+PBFT/PBFTin_log.vo : PBFT/PBFTin_log.v PBFT/PBFT.vo PBFT/PBFTtactics.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTin_log.v
+
+PBFT/PBFTheader.vo : PBFT/PBFTheader.v model/Quorum.vo model/Process.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTheader.v
+
+model/Received_or_generated.vo : model/Received_or_generated.v model/Quorum.vo model/Process.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds model/Received_or_generated.v
+
+model/generic_tactics.vo : model/generic_tactics.v model/EventOrdering.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds model/generic_tactics.v
+
+PBFT/PBFTstate_info.vo : PBFT/PBFTstate_info.v PBFT/PBFTwf_checkpoint_state.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTstate_info.v
+
+coq-tools/list_util.vo : coq-tools/list_util.v coq-tools/tactics2.vo coq-tools/tactics_util.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds coq-tools/list_util.v
+
+PBFT/PBFTtactics4.vo : PBFT/PBFTtactics4.v PBFT/PBFTtactics2.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTtactics4.v
+
+model/EventOrdering.vo : model/EventOrdering.v coq-tools/list_util.vo model/Node.vo model/Msg.vo model/Crypto.vo model/AuthMsg.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds model/EventOrdering.v
+
+PBFT/PBFTat_most_f_byz.vo : PBFT/PBFTat_most_f_byz.v PBFT/PBFT.vo model/CorrectKeys.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTat_most_f_byz.v
+
+PBFT/PBFTview_change_in_log_own.vo : PBFT/PBFTview_change_in_log_own.v PBFT/PBFT.vo PBFT/PBFTprops2.vo PBFT/PBFTtactics.vo PBFT/PBFTwell_formed_log.vo PBFT/PBFTordering.vo PBFT/PBFTnew_view_in_log.vo PBFT/PBFTwf_view_change_state.vo PBFT/PBFTview_change_in_log.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTview_change_in_log_own.v
+
+PBFT/PBFTdelay_of_send_prepares.vo : PBFT/PBFTdelay_of_send_prepares.v PBFT/PBFTreceived_prepare_like1.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTdelay_of_send_prepares.v
+
+model/list_util1.vo : model/list_util1.v model/generic_tactics.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds model/list_util1.v
+
+model/Crypto.vo : model/Crypto.v model/Node.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds model/Crypto.v
+
+PBFT/PBFTgarbage_collect_pre_prepare.vo : PBFT/PBFTgarbage_collect_pre_prepare.v PBFT/PBFTgarbage_collect_misc1.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTgarbage_collect_pre_prepare.v
+
+model/Quorum.vo : model/Quorum.v model/generic_tactics.vo model/list_util1.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds model/Quorum.v
+
+PBFT/PBFTlearns_or_knows_cp_vc_nv.vo : PBFT/PBFTlearns_or_knows_cp_vc_nv.v PBFT/PBFTlearns_or_knows_vc_nv.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTlearns_or_knows_cp_vc_nv.v
+
+PBFT/PBFTcommit_in_log_preserves.vo : PBFT/PBFTcommit_in_log_preserves.v PBFT/PBFTprops2.vo PBFT/PBFTwell_formed_log.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTcommit_in_log_preserves.v
+
+PBFT/PBFTtactics3.vo : PBFT/PBFTtactics3.v PBFT/PBFTwell_formed_log_def.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTtactics3.v
+
+PBFT/PBFTtactics2.vo : PBFT/PBFTtactics2.v PBFT/PBFTtactics.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTtactics2.v
+
+PBFT/PBFTnew_view_in_log.vo : PBFT/PBFTnew_view_in_log.v PBFT/PBFT.vo PBFT/PBFTprops2.vo PBFT/PBFTtactics.vo PBFT/PBFTwf_view_change_state.vo
+	coqc -R coq-tools util -R model model -R components components -R PBFT PBFT -R PrimaryBackup PrimaryBackup -R runtime runtime -R TwoThirds TwoThirds PBFT/PBFTnew_view_in_log.v

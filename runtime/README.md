@@ -1,22 +1,3 @@
-***************************** DISCLAIMER *****************************
-
-nocrypto seems to be broken at the moment.  We're looking into a fix.
-For now you have to install it by hand from their github repository
-(I'm using OCaml version 4.06.0):
-clone `https://github.com/mirleft/ocaml-nocrypto`; then checkout the
-last stable version, namely
-`1c4fb7aaefcd9bd78dc6f7c53906eafcd7f94496`; then change
-`Sexplib.Sexp.t` into `Ppx_sexp_conv_lib.Sexp.t` in `nocrypto.mli`;
-then run
-`./pkg/pkg.ml build --with-unix true --with-lwt true --xen false --freestanding false`
-(you might have to install extra opam packages such as `oUnit` and `cstruct-unix`);
-finally install it through opam, e.g., running
-`opam pin add nocrypto . -n` and then `opam install nocrypto --verbose`.
-
-**********************************************************************
-
-
-
 =====================================================================
 =--
 
@@ -37,6 +18,10 @@ To use the simulator:
 - run "./Simul.native -max XXX", where XXX is the number of requests
   to send
 
+By default it's going to sign messages using RSA. If you don't want to
+use signatures, set 'signing' to false in Simul.ml and comment out the
+crypto stuff towards the end of PBFTsim.v (see the comments
+there---search for "crypto stuff").
 
 =====================================================================
 =--

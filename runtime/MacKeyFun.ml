@@ -18,7 +18,7 @@ let export_key (printb : bool) (symkeyfile : string) (n : int) (m : int) : unit 
 
   let secret = mk_secret n m in
   let key : Cstruct.t = Cstruct.of_string secret in
-  let sym_key = Sexplib.Sexp.to_string (Cstruct.sexp_of_t key) in
+  let sym_key = Cstruct.to_string key in
 
   Writer.open_file ~append:(false) symkeyfile
   >>= fun symw ->
@@ -33,12 +33,12 @@ let export_key (printb : bool) (symkeyfile : string) (n : int) (m : int) : unit 
 
 let read_symmetric_key (symkeyfile : string) : Cstruct.t =
   print_endline ("[reading symmetric key from " ^ symkeyfile ^ "]");
-  Cstruct.t_of_sexp (Sexplib.Sexp.load_sexp symkeyfile)
+  Cstruct.of_string symkeyfile
 
 
 let read_key symkeyfile : unit Deferred.t =
   let sym : Cstruct.t = read_symmetric_key symkeyfile in
-  let sym_key = Sexplib.Sexp.to_string (Cstruct.sexp_of_t sym) in
+  let sym_key = Cstruct.to_string sym in
   print_endline ("[symmetric key read from " ^ symkeyfile ^ ": " ^ sym_key ^ "]");
   Deferred.return ()
 

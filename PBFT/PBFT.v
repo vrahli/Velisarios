@@ -27,6 +27,9 @@
 
 
 Require Export PBFTheader.
+Require Export String.
+Require Export Peano.
+Require Export List.
 
 
 (* Contains PBFT implementation *)

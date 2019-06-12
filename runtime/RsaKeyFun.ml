@@ -120,8 +120,8 @@ let sign (privatekey : string) (publickey : string) (i : string) : unit =
 
 
 let verify_one (o : Obj.t) (n : Obj.t) (pub : Nocrypto.Rsa.pub) (dec : Cstruct.t) : bool =
-(*  print_endline (kCYN ^ "[verifying signature]" ^ kNRM);
-  let pub_key = Sexplib.Sexp.to_string (Nocrypto.Rsa.sexp_of_pub pub) in
+  print_endline (kCYN ^ "[verifying signature]" ^ kNRM);
+(*  let pub_key = Sexplib.Sexp.to_string (Nocrypto.Rsa.sexp_of_pub pub) in
   print_endline ("[using public key:" ^ pub_key ^ "]");*)
 
   let smsg : string = Marshal.to_string o [] in

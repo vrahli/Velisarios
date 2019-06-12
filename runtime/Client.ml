@@ -67,7 +67,7 @@ let sign_request breq priv pub =
    else print_endline ("[couldn't verify my own message]"));*)
   cs
 
-    
+
 let send_request prim view timestamp request id priv pub wnfo =
   let opr       = Obj.magic (Opr_add request) in
   let timestamp = timestamp in
@@ -346,7 +346,7 @@ module Worker = struct
         let _ = send_request_to_primary current_view initial_timestamp request id priv pub wnfos in
         let _ = start_timer ws current_view initial_timestamp in
         Deferred.return ws
-                                                                        
+
       let init_connection_state ~connection:_ ~worker_state:_ = return
     end
   end

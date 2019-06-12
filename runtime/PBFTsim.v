@@ -723,7 +723,7 @@ End PBFTinstance.
 (* ================== EXTRACTION ================== *)
 
 
-Extraction Language Ocaml.
+Extraction Language OCaml.
 
 (* printing stuff *)
 Extract Inlined Constant print_endline => "Prelude.print_coq_endline".
