@@ -14,7 +14,7 @@ Roadmap
 
 - The model is in `model`.
 - Our formalization of PBFT is in `PBFT`.
-- Our runtime environment is in `runtime`
+- Our runtime environment is in `runtime`.
 
 
 
