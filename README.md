@@ -22,3 +22,10 @@ Running
 =======
 
 To run PBFT, check out `runtime/README.md`.
+
+
+Authors
+=======
+
+- Vincent Rahli
+- Ivana Vukotic
